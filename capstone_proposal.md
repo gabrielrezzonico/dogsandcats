@@ -32,9 +32,9 @@ The dataset to be used contains 25,000 images of dogs and cats and can be obtain
 
 This capstone also use the "weights" (knowledge) of the pretrained models on the ImageNet dataset, these weights files are listed below:
 
-* VGG: https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5
-* Resnet50: https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5
-* Inverption V3: https://github.com/fchollet/deep-learning-models/releases/download/v0.5/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5
+* VGG: https://goo.gl/go2y7h
+* Resnet50: https://goo.gl/MuftHu
+* Inverption V3: https://goo.gl/R0Ig5B
 
 
 ### Solution Statement
@@ -56,9 +56,7 @@ As a secondary benchmark, the Public Leaderboard of the Kaggle's competition can
 The evaluation metric is going to be the one used in the competition itself: log loss. This can be calculated with the following formula:
 
 
-```math
-LogLoss = - \frac {1}{n}\sum_{i=1}^{n} [y_i log(p_i) + (1-y_i) log(1-p_i)]
-```
+$$LogLoss = - \frac {1}{n}\sum_{i=1}^{n} [y_i log(p_i) + (1-y_i) log(1-p_i)]$$
 
 where
 

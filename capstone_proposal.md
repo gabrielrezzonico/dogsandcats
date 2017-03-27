@@ -30,7 +30,7 @@ The objective of this capstone is to compare the accuracy of the transfer of lea
 
 The dataset to be used contains 25,000 images of dogs and cats and can be obtained in the Kaggle's Competition site: https://www.kaggle.com/c/dogs-vs-cats-redux-kernels-edition/data, for this capstone only a subset of the data is going to be used.
 
-This capstone also use the "weigths" (knowledge) of the pretrained models on the ImageNet dataset, these weights files are listed below:
+This capstone also use the "weights" (knowledge) of the pretrained models on the ImageNet dataset, these weights files are listed below:
 
 * VGG: https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5
 * Resnet50: https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5
@@ -38,7 +38,6 @@ This capstone also use the "weigths" (knowledge) of the pretrained models on the
 
 
 ### Solution Statement
-_(approx. 1 paragraph)_
 
 A small convolutional neural network consisting of two convolutional layers and a fully connected network is going to be trained using the Cats and Dogs dataset. These results are going to be used as a benchmark.
 
@@ -56,15 +55,16 @@ As a secondary benchmark, the Public Leaderboard of the Kaggle's competition can
 
 The evaluation metric is going to be the one used in the competition itself: log loss. This can be calculated with the following formula:
 
-$$
-LogLoss = - \frac {1}{n}\sum_{i=1}^{n} [y_i log(ŷ_i) + (1-y_i) log(1-ŷ)]
-$$
+
+```math
+LogLoss = - \frac {1}{n}\sum_{i=1}^{n} [y_i log(p_i) + (1-y_i) log(1-p_i)]
+```
 
 where
 
 n is the number of images in the test set
 
-ŷi is the predicted probability of the image being a dog
+pi is the predicted probability of the image being a dog
 
 yi is 1 if the image is a dog, 0 if cat
 
@@ -77,7 +77,7 @@ The capstone is going to be built using the open source neural network library K
 
 The data is going to be read using Keras library function. Pixels are going to be normilize by dividing each one by 255. Folder structure is going to be rearrange for easy manipulation. All the images are going to be resized to a common size. The images are going to be splitted in train, validation and test. No further manipulation is going to be made to the data unless strictly necessary.
 
-A small Convolutional neural network is going to be trained on the data and the logaritmic loss is going to be calculated for the test set. A small snippet of code is given as a reference:
+A small Convolutional neural network is going to be trained on the data and the logarithmic loss is going to be calculated for the test set. A small snippet of code is given as a reference:
 
 ```python
 
@@ -109,7 +109,7 @@ x = Dense(24, activation='relu', kernel_initializer="he_uniform")(x)
 predictions = Dense(2, activation='softmax')(x)
 ```
 
-For each of the pre-trained models we are going to compute the features for each image only once to acelerate future processing. The following code is only a snippet of the code to be used:
+For each of the pre-trained models we are going to compute the features for each image only once to accelerate future processing. The following code is only a snippet of the code to be used:
 
 ```python
 from keras.applications.vgg16 import VGG16

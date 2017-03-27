@@ -14,12 +14,11 @@ task through the transfer of knowledge from a task that has already been learned
 
 We can see the concept of transfer learning in the real world, when a person tries to learn a new task, that person is going to use previously acquired concept to accelerate the process of learning. Learning to play the guitar is going to be an relatively easier task for a person who has an extensive experience playing music.
 
-Most of the time, obtaining training data is an expensive task, this is one of the reasons to use Transfer Learning of a big previously acquired dataset [1] to a new recognition task.
-
-Transfer Learning becomes increasingly important if we take into consideration that the "state of art" models for image recognition are trained for months using high performance computers. [2] [3]
+Most of the time, obtaining training data is an expensive task, this is one of the reasons to use Transfer Learning of a big previously acquired dataset [1] to a new task. Transfer Learning becomes increasingly important if we take into consideration that the "state-of-the-art" models are trained for months using high performance computers. [2] [3]
 
 Image recognition is the task of determining whether or not a image contains a specific object or not. There has been a boom of startups using this technology to solve real life problems. [4] Currently the best algorithms to solve the task are Convolutional Neural Networks [1]. 
 
+This capstone aims to provide a comparison of the performance of several pre-trained models for the task of image recognition. Can transfer learning be applied to image an recognition task? The findings of this capstone would be invaluable for people who either do not have the monetary resources or the time to train a model from scratch.
 
 ### Problem Statement
 

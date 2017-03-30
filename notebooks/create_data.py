@@ -5,7 +5,7 @@ TEST_DIRECTORY = "../data/test/"
 
 CLASSES = ['cat', 'dog']
 
-VALIDATION_SIZE = 0.2 # size of the validation we want to use
+VALIDATION_SIZE = 0.2 # size of the validation we want to use 
 TEST_SIZE = 0.1
 
 import glob
@@ -44,7 +44,7 @@ dog_files = np.random.permutation(glob.glob(dog_pattern))
 # randomly split the files in train folder and move them to validation
 number_validation_dog_files = int(len(dog_files) * VALIDATION_SIZE)
 number_test_dog_files = int(len(dog_files) * TEST_SIZE)
-
+print(number_test_dog_files)
 for index, dog_file in enumerate(dog_files):
     file_name = os.path.split(dog_file)[1]
     if index < number_validation_dog_files:#validation files

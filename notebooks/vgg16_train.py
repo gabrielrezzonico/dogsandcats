@@ -1,4 +1,4 @@
-IMAGE_SIZE = (64,64) # The dimensions to which all images found will be resized.
+IMAGE_SIZE = (180,202) # The dimensions to which all images found will be resized.
 BATCH_SIZE = 16
 NUMBER_EPOCHS = 8
 
@@ -6,11 +6,12 @@ TENSORBOARD_DIRECTORY = "../logs/simple_model/tensorboard"
 TRAIN_DIRECTORY = "../data/train/"
 VALID_DIRECTORY = "../data/valid/"
 
-NUMBER_TRAIN_SAMPLES = 20000
+NUMBER_TRAIN_SAMPLES = 17500
 NUMBER_VALIDATION_SAMPLES = 5000
 
 PRECOMPUTED_DIRECTORY = "../precomputed/vgg16/"
 
+WEIGHTS_DIRECTORY = "../weights/"
 
 ###########
 # base model
@@ -130,6 +131,6 @@ hist = model.fit_generator(
 ##############
 # save weights
 ##############
-model_save_path = WEIGHTS_DIRECTORY + 'vgg16_pretrained_weights.h5'
+model_save_path = WEIGHTS_DIRECTORY + 'vgg16_pretrained_v1.h5'
 print('Saving TOP (FCN) weigths to ', model_save_path)
-model.save_weights(model_save_path, overwrite=True)
+model.save(model_save_path)

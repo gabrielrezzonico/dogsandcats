@@ -40,21 +40,20 @@ from keras.models import Model
 # this is the model we will train
 model = Model(inputs=base_model.input, outputs=predictions)
 
+
+############
+# load weights
+############
+model_save_path = WEIGHTS_DIRECTORY + 'vgg16_pretrained_weights.h5'
+model.load_weights(model_save_path)
+
+
 #############
 # Set the non trainable layers
 #############
-TRAINABLE_LAST_LAYERS = 0
-assert TRAINABLE_LAST_LAYERS >= 0
-# first: train only the top layers (which were randomly initialized)
-# i.e. freeze all convolutional InceptionV3 layers
-if TRAINABLE_LAST_LAYERS == 0:
-    for layer in base_model.layers:
-        layer.trainable = False
-    print(len(base_model.layers))
-else:
-    for layer in base_model.layers[:-TRAINABLE_LAST_LAYERS]:
-        layer.trainable = False
-    print(len(base_model.layers[:-TRAINABLE_LAST_LAYERS]))
+for layer in base_model.layers[:25]:
+    layer.trainable = False
+print(len(base_model.layers[:25]))
 
 
 #############
@@ -69,7 +68,7 @@ callbacks = [early_stop]#, tensorboard_logger]
 #############
 # model optimizer
 #############
-OPTIMIZER_LEARNING_RATE = 1e-2
+OPTIMIZER_LEARNING_RATE = 1e-5
 OPTIMIZER_DECAY = 1e-4
 OPTIMIZER_MOMENTUM = 0.89
 OPTIMIZER_NESTEROV_ENABLED = False
@@ -131,6 +130,6 @@ hist = model.fit_generator(
 ##############
 # save weights
 ##############
-model_save_path = WEIGHTS_DIRECTORY + 'vgg16_pretrained_v1.h5'
+model_save_path = WEIGHTS_DIRECTORY + 'vgg16_pretrained_v2.h5'
 print('Saving TOP (FCN) weigths to ', model_save_path)
 model.save(model_save_path)

@@ -61,10 +61,15 @@ print(len(base_model.layers))
 #Keras callbacks
 #############
 from keras.callbacks import EarlyStopping
-from keras.callbacks import TensorBoard
+from keras.callbacks import ModelCheckpoint
 # Early stop in case of getting worse
 early_stop = EarlyStopping(monitor = 'val_loss', patience = 3, verbose = 0)
-callbacks = [early_stop]#, tensorboard_logger]
+# Checkpoint the model weights
+checkpoint_file_path =  WEIGHTS_DIRECTORY + 'resnet50_pretrained_weights.h5'
+checkpointer = ModelCheckpoint(filepath=checkpoint_file_path, verbose=1, save_best_only=True)
+print('Setting {} as folder for checkpoints.'.format(checkpoint_file_path))
+callbacks = [checkpointer, early_stop]
+
 
 #############
 # model optimizer
@@ -127,9 +132,3 @@ hist = model.fit_generator(
         callbacks=callbacks,
         verbose=1)
 
-
-##############
-# save weights
-##############
-print('Saving ResNet50 training weigths to ', model_save_path)
-model.save(model_save_path)

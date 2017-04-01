@@ -40,30 +40,35 @@ from keras.models import Model
 # this is the model we will train
 model = Model(inputs=base_model.input, outputs=predictions)
 
-
 ############
 # load weights
 ############
+import os.path
 model_save_path = WEIGHTS_DIRECTORY + 'vgg16_pretrained_weights.h5'
-model.load_weights(model_save_path)
-
+if os.path.exists(model_save_path) == True:
+    print("Loading weights from: {}".format(model_save_path))
+    model.load_weights(model_save_path)
 
 #############
 # Set the non trainable layers
 #############
-for layer in base_model.layers[:25]:
+for layer in base_model.layers:
     layer.trainable = False
-print(len(base_model.layers[:25]))
+print(len(base_model.layers))
 
 
 #############
 #Keras callbacks
 #############
 from keras.callbacks import EarlyStopping
-from keras.callbacks import TensorBoard
+from keras.callbacks import ModelCheckpoint
 # Early stop in case of getting worse
 early_stop = EarlyStopping(monitor = 'val_loss', patience = 3, verbose = 0)
-callbacks = [early_stop]#, tensorboard_logger]
+# Checkpoint the model weights
+checkpoint_file_path =  WEIGHTS_DIRECTORY + 'vvg16_pretrained_weights.h5'
+checkpointer = ModelCheckpoint(filepath=checkpoint_file_path, verbose=1, save_best_only=True)
+print('Setting {} as folder for checkpoints.'.format(checkpoint_file_path))
+callbacks = [checkpointer, early_stop]
 
 #############
 # model optimizer
@@ -126,10 +131,3 @@ hist = model.fit_generator(
         callbacks=callbacks,
         verbose=1)
 
-
-##############
-# save weights
-##############
-model_save_path = WEIGHTS_DIRECTORY + 'vgg16_pretrained_v2.h5'
-print('Saving TOP (FCN) weigths to ', model_save_path)
-model.save(model_save_path)

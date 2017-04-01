@@ -97,26 +97,37 @@ The are nomajor anormalities beside the stadistics shown in this section, one th
 
 ### Algorithms and Techniques
 
-To conduct transfer learning, the pre-trained weights of three models where used. This three models are InceptionV3, ResNet50 and Vgg16. Although we are not going to enter in detail, this models have several layers of convolution and pooling (and several other operations) with different network's architecture.  
+Artificial neural network are used heavily in this capstone, these networks are a computational model based originally in the human brain. A neural network is an interconection of neurons. Each Neuron is a computation unit that receives an input, aplies a weight, bias and an activation function, producing an output:
+
+$$ output = f(w1 . X1 + b) $$
+
+where f is the activation function, X1 is the input, w1 is the weight and b is the bias.
+
+In an Neural network all the neurons from one layer are connected with all the neurons from the next layer. To get a better understanding of this concept, this is a useful resource [7]
+
+Convolutional neural networks are the main topic of this capstone. CNN are a type of artificail neural network that take advantage of assuming that the input is an image. Each neuron in a layer of a CNN is only connected to a region of the input. This way the number of weights that each layer manage is smaller than the ones from a Neural Network. CNN are mainly compose of two types of operation: Convolution and Pooling. On top of CNN Fully Connected Neuwork are used, these are Neural networks.
+
+To conduct transfer learning (this is, to use the knowledge already learnet by the network using other dataset) the pre-trained weights of three models where used. This three models are InceptionV3, ResNet50 and Vgg16. Although we are not going to enter in detail, this models have several layers of convolution and pooling (and several other operations) with different network's architecture, a reference explication is given below:
+
+* VGG16
+
+This model created in 2014, obtained an error rate of 7.3% on the ILSVRC 2014 competition. This convolutional neural network has 16 layers, it uses 3x3 convulutional layers with a max pooling of 2x2. It uses RELU as activation function. [8]
+
+* InceptionV3 
+
+This deep convolutional neural network was developed by Google. The most important layer of this network is called Inception. The inception module allows the network to compute operation in parallel, there are several paths in each inception module with different operations. The model itself can learn wich path its better when training. [2]
+
+
+* ResNet50 
+
+This convolutional neural network was invented by Microsoft. It has 152 layers. The main idea of this network is a block called Residual Block. This block has two convolutional operations, like any other CNN but the difference is that it adds the input to the block to the output. [3]
+
 
 The "weights" (knowledge) of the models used in this capstone, where pretrained on the ImageNet dataset, the weights files used are listed below:
 
 * VGG: https://goo.gl/go2y7h
 * Resnet50: https://goo.gl/MuftHu
 * Inverption V3: https://goo.gl/R0Ig5B
-
-The process used to transfer the learned features of the CNN to the new domain is the same for every pre-trained CNN. The main steps are explained bellow:
-
-1. Create the model's network architecture and load the weight file. In this step we are not going to create the "classification" head of the original network, only the CNN layers are created. All these layers are set to be NON trainable.
-
-2. On top of the network created in the step one, a small Fully Connected Network was connected with the objective to classified the images. 
-
-3. We feed our complete network we the images from the Cats and Dogs data set. The CNN uses its weights to computed pre-learned useful feature. The FCN receives these "features" computed by the pre-trained CNN and try to use this features to predict iamge in the new domain.
-
-We repeat these process by several epochs.
-
-4. Once we have our FCN classifier fully trained, we set the last layers of the CNN to be "trainable". Set the learning rate to a lower value and feed the complete network. This way we slightly modify the weights of the last layers of the CNN to be tuned with the new dataset.
-
 
 A CNN completed trained on the Dogs and Cats dataset was used. The architecture of the network can be seen in Figura 6.
 
@@ -159,6 +170,20 @@ There was not need to preprocess the images of the dataset. The only preprocessi
 
 The tecnique of data augmentation was also used during the training step. During this step of data augmentation, the tecniques used where to flip the images orizontally. Shear and zoom with an angle of 0.2 radians was also used.
 
+
+### Process
+
+The process used to transfer the learned features of the CNN to the new domain is the same for every pre-trained CNN. The main steps are explained bellow:
+
+1. Create the model's network architecture and load the weight file. In this step we are not going to create the "classification" head of the original network, only the CNN layers are created. All these layers are set to be NON trainable.
+
+2. On top of the network created in the step one, a small Fully Connected Network was connected with the objective to classified the images. 
+
+3. We feed our complete network we the images from the Cats and Dogs data set. The CNN uses its weights to computed pre-learned useful feature. The FCN receives these "features" computed by the pre-trained CNN and try to use this features to predict iamge in the new domain.
+
+We repeat these process by several epochs.
+
+4. Once we have our FCN classifier fully trained, we set the last layers of the CNN to be "trainable". Set the learning rate to a lower value and feed the complete network. This way we slightly modify the weights of the last layers of the CNN to be tuned with the new dataset.
 
 
 ### Implementation
@@ -281,9 +306,13 @@ optimizer = SGD(lr=OPTIMIZER_LEARNING_RATE,
           nesterov=OPTIMIZER_NESTEROV_ENABLED)
 ```
 
-The learning rate was decresed for the fine-tuning step.
+This learning rate was selected empirically. The learning rate was decresed for the fine-tuning step. 
 
-During the development of the capstone, pre-computed features of each model were tried to be computed, with the idea of use this pre computed features as an input to the FCN. This tecnique proved complicated, because of the size of the dataset and the amount of RAM memory available in the system used to run the process.
+The models are really complex (mainly because of the use of pre-trained models) and are really deep, this make the model prone to overfitting. To combat this problem a Dropout layer was used. The parameter of the dropout was selected empirically.
+
+Several activation function where tested, the one that gave the best results was RELU. We used this one in the final model. 
+
+During the development of the capstone, pre-computed features of each model were tried to be computed, with the idea to use this pre computed features as an input to the FCN. This tecnique proved complicated, because of the size of the dataset and the amount of RAM memory available in the system used to run the process.
 
 
 
@@ -416,3 +445,5 @@ Possibly, another dataset has to be used. The best models shown here did extreml
 4. https://angel.co/image-recognition
 5. https://keras.io/
 6. https://github.com/tensorflow/tensorflow
+7. http://scs.ryerson.ca/~aharley/vis/fc/
+8. https://arxiv.org/pdf/1409.1556v6.pdf

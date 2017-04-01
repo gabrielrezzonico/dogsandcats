@@ -1,5 +1,6 @@
 # Machine Learning Engineer Nanodegree
-## Capstone Project
+
+## Transfer learning: comparison of VGG16, Resnet and Inception networks performance for image recognition
 Luis Gabriel Rezzonico
 
 April 1st, 2017

@@ -405,3 +405,13 @@ The way the images are read and used in the project can be improved. The importa
 Another improvement proposed is to use more models in the comparison in future work. Using more models could give more insight into transfer learning.
 
 Possibly, another dataset has to be used. The best models shown here did extremly well, so a more difficult dataset could be taken into account in future work.
+
+
+## References
+
+1. Olga Russakovsky*, Jia Deng*, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma, Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, Alexander C. Berg and Li Fei-Fei. (* = equal contribution) ImageNet Large Scale Visual Recognition Challenge. IJCV, 2015. https://arxiv.org/abs/1409.0575  
+2. Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna. Rethinking the Inception Architecture for Computer Vision. 2015. https://arxiv.org/abs/1512.00567
+3. Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun. Deep Residual Learning for Image Recognition. 2015. https://arxiv.org/abs/1512.03385
+4. https://angel.co/image-recognition
+5. https://keras.io/
+6. https://github.com/tensorflow/tensorflow

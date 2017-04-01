@@ -62,6 +62,7 @@ log() is the natural (base e) logarithm
 
 In order to calculate the logaritmic loss, the classifier implemented has assign a probabilty to each predicted class, in contrast to just yielding the predicted class.
 
+This metric was chosen because it penalizes incorrect predictions and because it is the one used in the compotition from which the dataset was obteined.
 
 
 ## II. Analysis

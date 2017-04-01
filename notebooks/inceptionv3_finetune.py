@@ -1,6 +1,6 @@
 IMAGE_SIZE = (224,224) # The dimensions to which all images found will be resized.
 BATCH_SIZE = 16
-NUMBER_EPOCHS = 8
+NUMBER_EPOCHS = 500
 
 TENSORBOARD_DIRECTORY = "../logs/simple_model/tensorboard"
 TRAIN_DIRECTORY = "../data/train/"
@@ -69,7 +69,7 @@ callbacks = [early_stop]#, tensorboard_logger]
 #############
 # model optimizer
 #############
-OPTIMIZER_LEARNING_RATE = 1e-5
+OPTIMIZER_LEARNING_RATE = 1e-4
 OPTIMIZER_DECAY = 1e-4
 OPTIMIZER_MOMENTUM = 0.89
 OPTIMIZER_NESTEROV_ENABLED = False
@@ -94,8 +94,9 @@ from keras.preprocessing.image import ImageDataGenerator
 ## train generator with shuffle but no data augmentation
 train_datagen = ImageDataGenerator(rescale = 1./255,
                                    shear_range=0.2,
-                                   zoom_range=0.2,
-                                   horizontal_flip=True)
+                                   rotation_range=20,
+                                   horizontal_flip=True,
+                                   vertical_flip=True)
 train_batch_generator =  train_datagen.flow_from_directory(TRAIN_DIRECTORY, 
                                                  target_size = IMAGE_SIZE,
                                                  class_mode = 'categorical', 

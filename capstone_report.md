@@ -12,7 +12,7 @@ April 1st, 2017
 
 Transfer learning is the improvement of learning in a new task through the transfer of knowledge from a task that has already been learned.
 
-We can see the concept of transfer learning in the real world, when a person tries to learn a new task, that person is going to use previously acquired concept to accelerate the process of learning. Learning to play the guitar is going to be an relatively easier task for a person who has an extensive experience playing music.
+We can see the concept of transfer learning in the real world, when a person tries to learn a new task, that person is going to use previously acquired concept to accelerate the process of learning. Learning to play the guitar is going to be a relatively easier task for a person who has an extensive experience playing music.
 
 Most of the time, obtaining training data is an expensive task, this is one of the reasons to use Transfer Learning of a big previously acquired dataset [1] to a new task. Transfer Learning becomes increasingly important if we take into consideration that the "state-of-the-art" models are trained for months using high performance computers. [2] [3]
 
@@ -38,7 +38,7 @@ The objective of this capstone is to compare the accuracy obtained by state-of-t
 
 The aim of the capstone is to give a comparison of the performance obtained by the pre trained models on the dataset of Cats and Dogs. As a new kaggle competitor, people ask themselves if it is better to train their own models or to re-train a previously trained model. 
 
-Although transfer of learning has been addressed by several papers: [https://arxiv.org/pdf/1411.1792v1.pdf], [https://arxiv.org/pdf/1403.6382.pdf] and [https://arxiv.org/pdf/1310.1531.pdf], this capstone has a more practical approach. Is going to shown experimentally that in general is better to re-train a previously trained model, taking advantage of the features already learned by the model.
+Although transfer of learning has been addressed by several papers: [https://arxiv.org/pdf/1411.1792v1.pdf], [https://arxiv.org/pdf/1403.6382.pdf] and [https://arxiv.org/pdf/1310.1531.pdf], this capstone has a more practical approach. Is going to be shown experimentally that in general is better to re-train a previously trained model, taking advantage of the features already learned by the model.
 
 
 
@@ -89,7 +89,7 @@ Figure 3 and Figure 4 show a sample of the images to be used in the capstone, th
 
 ![Sample table of the dataset showing the first five entries.](img/01._Data_loading_and_analysis4.png)
 
-The are nomajor anormalities beside the stadistics shown in this section, one thing to mention is that there are some images that contain some other object besides cats and dogs, an example can be shown in Figure 5.
+The are no major anormalities beside the stadistics shown in this section, one thing to mention is that there are some images that contain some other object besides cats and dogs, an example can be shown in Figure 5.
 
 ![Sample table of the dataset showing the first five entries.](img/01.Data_loading_and_analysis5.png)
 
@@ -129,7 +129,7 @@ The "weights" (knowledge) of the models used in this capstone, where pretrained 
 * Resnet50: https://goo.gl/MuftHu
 * Inverption V3: https://goo.gl/R0Ig5B
 
-A CNN completed trained on the Dogs and Cats dataset was used. The architecture of the network can be seen in Figura 6.
+A CNN completely trained on the Dogs and Cats dataset was used. The architecture of the network can be seen in Figura 6.
 
 ![Convolutional Neural Network used as benchmark.](img/02_Simple_CNN.png)
 
@@ -168,7 +168,7 @@ An script was written to convert between the two formats. It can be found in the
 
 There was not need to preprocess the images of the dataset. The only preprocessing tecnique applied to the images was normaliztion, each value of each RGB image was divided by 255.
 
-The tecnique of data augmentation was also used during the training step. During this step of data augmentation, the tecniques used where to flip the images orizontally. Shear and zoom with an angle of 0.2 radians was also used.
+The tecnique of data augmentation was also used during the training step. During this step of data augmentation, the tecniques used where to flip the images horizontally. Shear and zoom with an angle of 0.2 radians was also used.
 
 
 ### Process
@@ -179,7 +179,7 @@ The process used to transfer the learned features of the CNN to the new domain i
 
 2. On top of the network created in the step one, a small Fully Connected Network was connected with the objective to classified the images. 
 
-3. We feed our complete network we the images from the Cats and Dogs data set. The CNN uses its weights to computed pre-learned useful feature. The FCN receives these "features" computed by the pre-trained CNN and try to use this features to predict iamge in the new domain.
+3. We feed our complete network with the images from the Cats and Dogs data set. The CNN uses its weights to computed pre-learned useful features. The FCN receives these "features" computed by the pre-trained CNN and try to use this features to predict iamge in the new domain.
 
 We repeat these process by several epochs.
 
@@ -312,7 +312,7 @@ The models are really complex (mainly because of the use of pre-trained models) 
 
 Several activation function where tested, the one that gave the best results was RELU. We used this one in the final model. 
 
-During the development of the capstone, pre-computed features of each model were tried to be computed, with the idea to use this pre computed features as an input to the FCN. This tecnique proved complicated, because of the size of the dataset and the amount of RAM memory available in the system used to run the process.
+During the development of the capstone, pre-computed features of each model were tried to be computed, with the idea to use this pre computed features as an input to the FCN. This technique proved complicated, because of the size of the dataset and the amount of RAM memory available in the system used to run the process.
 
 
 
@@ -323,7 +323,7 @@ During the development of the capstone, pre-computed features of each model were
 
 #### VGG16 pre-trained results
 
-The results obtained evaluation the pre-trained vgg16 model on the cats and dogs dataset are the following:
+The results obtained evaluating the pre-trained vgg16 model on the cats and dogs dataset are the following:
 
 |   | LogLoss  | Accuracy  |
 |---|---|---|
@@ -349,7 +349,7 @@ A few examples of erroneous classification can be seen in  Figure 11 and Figure 
 
 #### ResNet50 pre-trained results
 
-This model was extremly successful with the new dataset. The results obtained evaluation the pre-trained ResNet50 model on the cats and dogs dataset are the following:
+This model was extremly successful with the new dataset. The results obtained evaluating the pre-trained ResNet50 model on the cats and dogs dataset are the following:
 
 |   | LogLoss  | Accuracy  |
 |---|---|---|
@@ -359,7 +359,7 @@ The confusion matrix can be seen in Figure 13. There are more errors classifying
 
 ![Confusion matrix of the ResNet50 pre-trained model results.](img/matrix_resnet50_pre_trained.png)
 
-Afew examples of positive classification can be seen in Figure 14 and Figure 15.
+A few examples of positive classification can be seen in Figure 14 and Figure 15.
 
 ![Confusion matrix of the ResNet50 model results.](img/resnet50_pre_trained_ok1.png)
 
@@ -385,13 +385,13 @@ The confusion matrix can be seen in Figure 18. There are more errors classifying
 
 ![Confusion matrix of the InceptionV3 pre-trained model results.](img/matrix_inceptionv3_pre_trained.png)
 
-Afew examples of positive classification can be seen in Figure 19 and Figure 20.
+A few examples of positive classification can be seen in Figure 19 and Figure 20.
 
 ![Confusion matrix of the InceptionV3 model results.](img/inceptionv3_pre_trained_ok1.png)
 
 ![Confusion matrix of the InceptionV3 model results.](img/inceptionv3_pre_trained_ok2.png)
 
-Afew examples of erroneous classification can be seen in  Figure 21 and Figure 22. We can see that these a not particularly difficult examples.
+A few examples of erroneous classification can be seen in  Figure 21 and Figure 22. We can see that these a not particularly difficult examples.
 
 ![Confusion matrix of the InceptionV3 model results.](img/inceptionv3_pre_trained_fail1.png)
 
@@ -406,7 +406,7 @@ We offer a comparison of the results obtained using the benchmark model and the 
 |   | LogLoss  | Accuracy  |
 |---|---|---|
 | Benchmark CNN  | 0.358  | 0.87  |
-| Pre-trained VGG16  | 0.335  | 0.9  |
+| Pretrained VGG16  | 0.335  | 0.9  |
 | Pretrained ResNet50  | **0.045**  | **0.98**  |
 | Pretrained InceptionV3  | **0.046**  | **0.97**  |
 
@@ -423,9 +423,9 @@ In this capstone we have created and trained a model from scratch and used the p
 
 It has been shown that using only a few lines of code we obtain better results than training a model from scratch. We shown that only 15 lines of code are required to implement a pre-trained model using the facilities offer by libraries like Keras. Transfer learning should be used as an easy way to obtain a benchmark to any new task, and improve from there.
 
-In regard of the time of training, using a pre-trained model with take advantage of the hours of training done by the teams that create and trained the show models. This is an important point because the time and economics resource used in training the models can be leverage to new task.
+In regard of the time of training, using a pre-trained model will take advantage of the hours of training done by the teams that create and trained the show models. This is an important point because the time and economics resource used in training the models can be leverage to new task.
 
-One of the difficult aspects of the project was to manage a large amount of images in RAM, this can be hard deppending on the computer resources used.
+One of the difficult aspects of this project was to manage a large amount of images in RAM, this can be hard deppending on the computer resources used.
 
 
 ### Improvement

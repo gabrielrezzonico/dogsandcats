@@ -72,26 +72,32 @@ This metric was chosen because it penalizes incorrect predictions and because it
 
 All the code used to obtained the metrics showed in this section can be found in the following link: https://goo.gl/pXMz8K.
 
-There are 25000 images in the dataset. The train directory consist of labelled data with the following convention for each image:
+There are 25000 images in the dataset. Figure 1 shows that there are the same number of cats an dogs in the dataset. This means that there is not going to be any problem related with imbalanced data.
+
+![Number of images by class](img/01.Data_loading_and_analysis6.png)
+
+The train directory consist of labelled data with the following convention for each image:
 data/train/CLASS.id.jpg. The class of each image is given in the file name. In this capstone  keras.preprocessing.image library is going to be used, to do so, we need the folder structure to be:
-data/train/CLASS/image-name.jpg. Figure 1 shows some metadata of the five first entries of the dataset, we can see the filename convention and each class.
+data/train/CLASS/image-name.jpg. Figure 2 shows some metadata of the five first entries of the dataset, we can see the filename convention and each class.
 
 ![Sample table of the dataset showing the first five entries.](img/01.Data_loading_and_analysis.png)
 
- Image 2 gives some metrics of the image. We can see that the mean size of the images is (360.478080,404.09904). The smallest height is 32 pixels and the smallest width is 42 pizels.
+ Figure 3 and Figure 4 gives some metrics of the image file size. We can see that the mean size of the images is (360.478080,404.09904). Image width values are concentrated around 500 pixels and the height around 380 pixels. There are only two outliers with heigher resolution than the rest of the images. The smallest height is 32 pixels and the smallest width is 42 pizels. 
 
 ![Metrics of the dataset.](img/01.Data_loading_and_analysis2.png)
 
+![Metrics of the dataset.](img/01.Data_loading_and_analysis7.png)
 
-Figure 3 and Figure 4 show a sample of the images to be used in the capstone, this is useful to know whith what we are going to be dealing.
 
-![Sample table of the dataset showing the first five entries.](img/01.Data_loading_and_analysis3.png)
+Figure 5 and Figure 6 show a sample of the images to be used in the capstone, this is useful to know whith what we are going to be dealing.
 
-![Sample table of the dataset showing the first five entries.](img/01._Data_loading_and_analysis4.png)
+![Sample images from the dataset.](img/01.Data_loading_and_analysis3.png)
 
-The are no major anormalities beside the stadistics shown in this section, one thing to mention is that there are some images that contain some other object besides cats and dogs, an example can be shown in Figure 5.
+![Sample images from the dataset.](img/01._Data_loading_and_analysis4.png)
 
-![Sample table of the dataset showing the first five entries.](img/01.Data_loading_and_analysis5.png)
+The are no major anormalities beside the stadistics shown in this section, one thing to mention is that there are some images that contain some other object besides cats and dogs, an example can be shown in Figure 7.
+
+![Difficult image example.](img/01.Data_loading_and_analysis5.png)
 
 
 
@@ -129,7 +135,7 @@ The "weights" (knowledge) of the models used in this capstone, where pretrained 
 * Resnet50: https://goo.gl/MuftHu
 * Inverption V3: https://goo.gl/R0Ig5B
 
-A CNN completely trained on the Dogs and Cats dataset was used. The architecture of the network can be seen in Figura 6.
+A CNN completely trained on the Dogs and Cats dataset was used. The architecture of the network can be seen in Figure 8.
 
 ![Convolutional Neural Network used as benchmark.](img/02_Simple_CNN.png)
 
@@ -137,7 +143,7 @@ A CNN completely trained on the Dogs and Cats dataset was used. The architecture
 
 ### Benchmark
 
-The benchmark used was the results of the logaritmic loss obtained by the CNN trained from scratch on the data set of Cats and Dogs. The CNN arquitecture used can be seen in figure 6. More information about the metric calculation can be obtained in the subsection "Metrics" of section 1.
+The benchmark used was the results of the logaritmic loss obtained by the CNN trained from scratch on the data set of Cats and Dogs. The CNN arquitecture used can be seen in figure 9. More information about the metric calculation can be obtained in the subsection "Metrics" of section 1.
 
 The results obtained using the benchmark CNN are the following:
 
@@ -308,9 +314,9 @@ optimizer = SGD(lr=OPTIMIZER_LEARNING_RATE,
 
 This learning rate was selected empirically. The learning rate was decresed for the fine-tuning step. 
 
-The models are really complex (mainly because of the use of pre-trained models) and are really deep, this make the model prone to overfitting. To combat this problem a Dropout layer was used. The parameter of the dropout was selected empirically.
+The models are really complex (mainly because of the use of pre-trained models) and are really deep, this make the model prone to overfitting. To combat this problem a Dropout layer was used. The parameter of the dropout was selected empirically. First, dropout values of 0.9, 0.85 and 0.8 were tested with practically no change in the overfittin results while tested on the validation dataset. More extreme values were tried, 0.2 and 0.3, obtaining better results with a dropout of 0.3.
 
-Several activation function where tested, the one that gave the best results was RELU. We used this one in the final model. 
+Several activation function where tested, the one that gave the best results was RELU. Other activations functions tried were tanh and sigmoid, with these activations the model had difficults converging and the training step was more time consuming.  We used relu as the activation in the final model. 
 
 During the development of the capstone, pre-computed features of each model were tried to be computed, with the idea to use this pre computed features as an input to the FCN. This technique proved complicated, because of the size of the dataset and the amount of RAM memory available in the system used to run the process.
 
@@ -329,21 +335,21 @@ The results obtained evaluating the pre-trained vgg16 model on the cats and dogs
 |---|---|---|
 | Pre-trained VGG16  | 0.335  | 0.9  |
 
-The confusion matrix can be seen in Figure 8. There are more errors classifying cats as dogs than dogs as cats.
+The confusion matrix can be seen in Figure 10. There are more errors classifying cats as dogs than dogs as cats.
 
 ![Confusion matrix of the VGG16 pre-trained model results.](img/matrix_VGG16_pre_trained.png)
 
-A few examples of positive classification can be seen in Figure 9 and Figure 10.
+A few examples of positive classification can be seen in Figure 11 and Figure 12.
 
-![Confusion matrix of the VGG16 model results.](img/VGG16_pre_trained_ok1.png)
+![VGG16 Positive classification example](img/VGG16_pre_trained_ok1.png)
 
-![Confusion matrix of the VGG16 model results.](img/VGG16_pre_trained_ok2.png)
+![VGG16 Positive classification example](img/VGG16_pre_trained_ok2.png)
 
-A few examples of erroneous classification can be seen in  Figure 11 and Figure 12. We can see that these are not particularly difficult examples.
+A few examples of erroneous classification can be seen in  Figure 13 and Figure 14. We can see that these are not particularly difficult examples.
 
-![Confusion matrix of the VGG16 model results.](img/VGG16_pre_trained_fail1.png)
+![VGG16 erroneous classification example](img/VGG16_pre_trained_fail1.png)
 
-![Confusion matrix of the VGG16 model results.](img/VGG16_pre_trained_fail2.png)
+![VGG16 erroneous classification example](img/VGG16_pre_trained_fail2.png)
 
 
 
@@ -355,21 +361,21 @@ This model was extremly successful with the new dataset. The results obtained ev
 |---|---|---|
 | Pretrained ResNet50  | 0.045  | 0.98  |
 
-The confusion matrix can be seen in Figure 13. There are more errors classifying cats as dogs than dogs as cats.
+The confusion matrix can be seen in Figure 15. There are more errors classifying cats as dogs than dogs as cats.
 
 ![Confusion matrix of the ResNet50 pre-trained model results.](img/matrix_resnet50_pre_trained.png)
 
-A few examples of positive classification can be seen in Figure 14 and Figure 15.
+A few examples of positive classification can be seen in Figure 16 and Figure 17.
 
-![Confusion matrix of the ResNet50 model results.](img/resnet50_pre_trained_ok1.png)
+![ResNet50 Positive classification example](img/resnet50_pre_trained_ok1.png)
 
-![Confusion matrix of the ResNet50 model results.](img/resnet50_pre_trained_ok2.png)
+![ResNet50 Positive classification example](img/resnet50_pre_trained_ok2.png)
 
-A few random examples of erroneous classification can be seen in Figure 16 and Figure 17. We can see that these are really difficult examples. Figure 16 shows a cat partially covered by a cage and Figure 17 show a dog partially covered by a person and with bad light conditions.
+A few random examples of erroneous classification can be seen in Figure 18 and Figure 19. We can see that these are really difficult examples. Figure 18 shows a cat partially covered by a cage and Figure 19 show a dog partially covered by a person and with bad light conditions.
 
-![Confusion matrix of the ResNet50 model results.](img/resnet50_pre_trained_fail1.png)
+![ResNet50 erroneous classification example](img/resnet50_pre_trained_fail1.png)
 
-![Confusion matrix of the ResNet50 model results.](img/resnet50_pre_trained_fail2.png)
+![ResNet50 erroneous classification example](img/resnet50_pre_trained_fail2.png)
 
 
 
@@ -381,21 +387,21 @@ This model was extremly successful with the new dataset. The results obtained ev
 |---|---|---|
 | Pretrained InceptionV3  | 0.046  | 0.97  |
 
-The confusion matrix can be seen in Figure 18. There are more errors classifying cats as dogs than dogs as cats.
+The confusion matrix can be seen in Figure 20. There are more errors classifying cats as dogs than dogs as cats.
 
 ![Confusion matrix of the InceptionV3 pre-trained model results.](img/matrix_inceptionv3_pre_trained.png)
 
-A few examples of positive classification can be seen in Figure 19 and Figure 20.
+A few examples of positive classification can be seen in Figure 21 and Figure 22.
 
-![Confusion matrix of the InceptionV3 model results.](img/inceptionv3_pre_trained_ok1.png)
+![InceptionV3 Positive classification example](img/inceptionv3_pre_trained_ok1.png)
 
-![Confusion matrix of the InceptionV3 model results.](img/inceptionv3_pre_trained_ok2.png)
+![InceptionV3 Positive classification example](img/inceptionv3_pre_trained_ok2.png)
 
-A few examples of erroneous classification can be seen in  Figure 21 and Figure 22. We can see that these a not particularly difficult examples.
+A few examples of erroneous classification can be seen in  Figure 23 and Figure 24. We can see that these a not particularly difficult examples.
 
-![Confusion matrix of the InceptionV3 model results.](img/inceptionv3_pre_trained_fail1.png)
+![InceptionV3 erroneous classification example](img/inceptionv3_pre_trained_fail1.png)
 
-![Confusion matrix of the InceptionV3 model results.](img/inceptionv3_pre_trained_fail2.png)
+![InceptionV3 erroneous classification example](img/inceptionv3_pre_trained_fail2.png)
 
 
 
